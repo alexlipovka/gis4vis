@@ -23,15 +23,16 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 		[51.51, -0.047]
 	]).addTo(mymap).bindPopup("I am a polygon.");
 
-    $.ajax( {
-        type: "POST",
-        url: "data/kras_border.geojson",
-        dataType: "json",
-        success: function (response) {
-            geojsonLayer = L.geoJSON(response).addTo(mymap);
-            mymap.fitBounds(geojsonLayer.getBounds());
-        }
-    });
+    // $.ajax( {
+        // type: "POST",
+        // url: "data/kras_border.geojson",
+        // dataType: "json",
+        // success: function (response) {
+		var	geojsonLayer = L.geoJSON.AJAX("data/kras_border.geojson");
+		geojsonLayer.addTo(mymap);
+        mymap.fitBounds(geojsonLayer.getBounds());
+        // }
+    // });
 
 	var popup = L.popup();
 
