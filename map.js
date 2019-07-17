@@ -28,7 +28,7 @@ var mymap = L.map('mapid').setView([51.505, -0.09], 13);
         // url: "data/kras_border.geojson",
         // dataType: "json",
         // success: function (response) {
-		var	geojsonLayer = L.geoJSON.AJAX("data/kras_border.geojson");
+		var	geojsonLayer = new L.geoJSON.AJAX("data/kras_border.geojson");
 		geojsonLayer.addTo(mymap);
         mymap.fitBounds(geojsonLayer.getBounds());
         // }
