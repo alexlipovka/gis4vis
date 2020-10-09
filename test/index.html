@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/_1.js"></script>
+        <script src="data/_2.js"></script>
+        <script src="data/_3.js"></script>
+        <script src="data/_4.js"></script>
+        <script src="data/_5.js"></script>
+        <script src="data/borders_6.js"></script>
+        <script src="data/_7.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[56.019904823961035,92.87960462141696],[56.044285899399924,92.95149303463279]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop__1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['UTL_ID'] !== null ? autolinker.link(feature.properties['UTL_ID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__1_0(feature) {
+            switch(String(feature.properties['UTL_ID'])) {
+                case '003002000000':
+                    return {
+                pane: 'pane__1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,52,187,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '003008000000':
+                    return {
+                pane: 'pane__1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(137,171,229,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'None':
+                    return {
+                pane: 'pane__1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,150,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane__1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,231,131,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane__1');
+        map.getPane('pane__1').style.zIndex = 401;
+        map.getPane('pane__1').style['mix-blend-mode'] = 'normal';
+        var layer__1 = new L.geoJson(json__1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__1',
+            layerName: 'layer__1',
+            pane: 'pane__1',
+            onEachFeature: pop__1,
+            style: style__1_0,
+        });
+        bounds_group.addLayer(layer__1);
+        map.addLayer(layer__1);
+        function pop__2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Статус</th>\
+                        <td>' + (feature.properties['STATUS'] !== null ? autolinker.link(feature.properties['STATUS'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__2_0(feature) {
+            switch(String(feature.properties['STATUS'])) {
+                case '1':
+                    return {
+                pane: 'pane__2',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(112,204,234,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane__2',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,128,190,1.0)',
+                interactive: true,
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane__2',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,148,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane__2',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,198,85,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane__2');
+        map.getPane('pane__2').style.zIndex = 402;
+        map.getPane('pane__2').style['mix-blend-mode'] = 'normal';
+        var layer__2 = new L.geoJson(json__2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__2',
+            layerName: 'layer__2',
+            pane: 'pane__2',
+            onEachFeature: pop__2,
+            style: style__2_0,
+        });
+        bounds_group.addLayer(layer__2);
+        map.addLayer(layer__2);
+        function pop__3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Удельная стоимость</th>\
+                        <td>' + (feature.properties['areacost'] !== null ? autolinker.link(feature.properties['areacost'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__3_0(feature) {
+            if (feature.properties['areacost'] >= 1.000000 && feature.properties['areacost'] <= 13133489.400000 ) {
+                return {
+                pane: 'pane__3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,97,1,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['areacost'] >= 13133489.400000 && feature.properties['areacost'] <= 46849531.090000 ) {
+                return {
+                pane: 'pane__3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,184,99,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['areacost'] >= 46849531.090000 && feature.properties['areacost'] <= 114596349.000000 ) {
+                return {
+                pane: 'pane__3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,247,247,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['areacost'] >= 114596349.000000 && feature.properties['areacost'] <= 251114400.000000 ) {
+                return {
+                pane: 'pane__3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,171,210,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['areacost'] >= 251114400.000000 && feature.properties['areacost'] <= 830122278.400000 ) {
+                return {
+                pane: 'pane__3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(94,60,153,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane__3');
+        map.getPane('pane__3').style.zIndex = 403;
+        map.getPane('pane__3').style['mix-blend-mode'] = 'normal';
+        var layer__3 = new L.geoJson(json__3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__3',
+            layerName: 'layer__3',
+            pane: 'pane__3',
+            onEachFeature: pop__3,
+            style: style__3_0,
+        });
+        bounds_group.addLayer(layer__3);
+        map.addLayer(layer__3);
+        function pop__4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Стоимость</th>\
+                        <td>' + (feature.properties['cost'] !== null ? autolinker.link(feature.properties['cost'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__4_0(feature) {
+            if (feature.properties['cost'] >= 1.000000 && feature.properties['cost'] <= 13133489.400000 ) {
+                return {
+                pane: 'pane__4',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,231,37,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['cost'] >= 13133489.400000 && feature.properties['cost'] <= 46849531.090000 ) {
+                return {
+                pane: 'pane__4',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(93,201,98,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['cost'] >= 46849531.090000 && feature.properties['cost'] <= 114596349.000000 ) {
+                return {
+                pane: 'pane__4',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(32,144,141,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['cost'] >= 114596349.000000 && feature.properties['cost'] <= 251114400.000000 ) {
+                return {
+                pane: 'pane__4',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,98,147,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['cost'] >= 251114400.000000 && feature.properties['cost'] <= 830122278.400000 ) {
+                return {
+                pane: 'pane__4',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(155,93,170,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane__4');
+        map.getPane('pane__4').style.zIndex = 404;
+        map.getPane('pane__4').style['mix-blend-mode'] = 'normal';
+        var layer__4 = new L.geoJson(json__4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__4',
+            layerName: 'layer__4',
+            pane: 'pane__4',
+            onEachFeature: pop__4,
+            style: style__4_0,
+        });
+        bounds_group.addLayer(layer__4);
+        map.addLayer(layer__4);
+        function pop__5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Площадь </th>\
+                        <td>' + (feature.properties['AREA'] !== null ? autolinker.link(feature.properties['AREA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__5_0(feature) {
+            if (feature.properties['AREA'] >= 1.000000 && feature.properties['AREA'] <= 1216.000000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 1216.000000 && feature.properties['AREA'] <= 3751.000000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(100,171,176,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 3751.000000 && feature.properties['AREA'] <= 7821.000000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(157,211,167,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 7821.000000 && feature.properties['AREA'] <= 13204.540000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,233,173,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 13204.540000 && feature.properties['AREA'] <= 19418.240000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(237,248,185,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 19418.240000 && feature.properties['AREA'] <= 27502.000000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,237,170,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 27502.000000 && feature.properties['AREA'] <= 39987.100000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,201,128,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 39987.100000 && feature.properties['AREA'] <= 53079.000000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(249,158,89,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 53079.000000 && feature.properties['AREA'] <= 132746.190000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(232,91,58,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['AREA'] >= 132746.190000 && feature.properties['AREA'] <= 160232.000000 ) {
+                return {
+                pane: 'pane__5',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane__5');
+        map.getPane('pane__5').style.zIndex = 405;
+        map.getPane('pane__5').style['mix-blend-mode'] = 'normal';
+        var layer__5 = new L.geoJson(json__5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__5',
+            layerName: 'layer__5',
+            pane: 'pane__5',
+            onEachFeature: pop__5,
+            style: style__5_0,
+        });
+        bounds_group.addLayer(layer__5);
+        map.addLayer(layer__5);
+        function pop_borders_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Номер зоны</th>\
+                        <td>' + (feature.properties['zone_number'] !== null ? autolinker.link(feature.properties['zone_number'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Название зоны</th>\
+                        <td>' + (feature.properties['pzz_zone_name'] !== null ? autolinker.link(feature.properties['pzz_zone_name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Описание</th>\
+                        <td>' + (feature.properties['pzz_zone_desc'] !== null ? autolinker.link(feature.properties['pzz_zone_desc'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_borders_6_0(feature) {
+            switch(String(feature.properties['zone_number'])) {
+                case 'Ж-3':
+                    return {
+                pane: 'pane_borders_6',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,14,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Ж-4':
+                    return {
+                pane: 'pane_borders_6',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,113,25,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'МФ':
+                    return {
+                pane: 'pane_borders_6',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,0,161,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_borders_6',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(36,116,220,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_borders_6');
+        map.getPane('pane_borders_6').style.zIndex = 406;
+        map.getPane('pane_borders_6').style['mix-blend-mode'] = 'normal';
+        var layer_borders_6 = new L.geoJson(json_borders_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_borders_6',
+            layerName: 'layer_borders_6',
+            pane: 'pane_borders_6',
+            onEachFeature: pop_borders_6,
+            style: style_borders_6_0,
+        });
+        bounds_group.addLayer(layer_borders_6);
+        map.addLayer(layer_borders_6);
+        function pop__7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">addr:housenumber</th>\
+                        <td>' + (feature.properties['addr:housenumber'] !== null ? autolinker.link(feature.properties['addr:housenumber'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">addr:street</th>\
+                        <td>' + (feature.properties['addr:street'] !== null ? autolinker.link(feature.properties['addr:street'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">s</th>\
+                        <td>' + (feature.properties['s'] !== null ? autolinker.link(feature.properties['s'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">h</th>\
+                        <td>' + (feature.properties['h'] !== null ? autolinker.link(feature.properties['h'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">s_total</th>\
+                        <td>' + (feature.properties['s_total'] !== null ? autolinker.link(feature.properties['s_total'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style__7_0() {
+            return {
+                pane: 'pane__7',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane__7');
+        map.getPane('pane__7').style.zIndex = 407;
+        map.getPane('pane__7').style['mix-blend-mode'] = 'normal';
+        var layer__7 = new L.geoJson(json__7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json__7',
+            layerName: 'layer__7',
+            pane: 'pane__7',
+            onEachFeature: pop__7,
+            style: style__7_0,
+        });
+        bounds_group.addLayer(layer__7);
+        map.addLayer(layer__7);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/_7.png" /> Здания': layer__7,'borders<br /><table><tr><td style="text-align: center;"><img src="legend/borders_6_Ж30.png" /></td><td>Ж-3</td></tr><tr><td style="text-align: center;"><img src="legend/borders_6_Ж41.png" /></td><td>Ж-4</td></tr><tr><td style="text-align: center;"><img src="legend/borders_6_МФ2.png" /></td><td>МФ</td></tr><tr><td style="text-align: center;"><img src="legend/borders_6_3.png" /></td><td></td></tr></table>': layer_borders_6,'КД Площадь<br /><table><tr><td style="text-align: center;"><img src="legend/_5_112160.png" /></td><td>1 - 1216 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_121637511.png" /></td><td>1216 - 3751 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_375178212.png" /></td><td>3751 - 7821 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_7821132053.png" /></td><td>7821 - 13205 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_13205194184.png" /></td><td>13205 - 19418 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_19418275025.png" /></td><td>19418 - 27502 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_27502399876.png" /></td><td>27502 - 39987 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_39987530797.png" /></td><td>39987 - 53079 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_530791327468.png" /></td><td>53079 - 132746 </td></tr><tr><td style="text-align: center;"><img src="legend/_5_1327461602329.png" /></td><td>132746 - 160232 </td></tr></table>': layer__5,'КД Стоимость<br /><table><tr><td style="text-align: center;"><img src="legend/_4_1131334890.png" /></td><td>1 - 13133489 </td></tr><tr><td style="text-align: center;"><img src="legend/_4_13133489468495311.png" /></td><td>13133489 - 46849531 </td></tr><tr><td style="text-align: center;"><img src="legend/_4_468495311145963492.png" /></td><td>46849531 - 114596349 </td></tr><tr><td style="text-align: center;"><img src="legend/_4_1145963492511144003.png" /></td><td>114596349 - 251114400 </td></tr><tr><td style="text-align: center;"><img src="legend/_4_2511144008301222784.png" /></td><td>251114400 - 830122278 </td></tr></table>': layer__4,'КД Удельная стоимость<br /><table><tr><td style="text-align: center;"><img src="legend/_3_1131334890.png" /></td><td>1 - 13133489 </td></tr><tr><td style="text-align: center;"><img src="legend/_3_13133489468495311.png" /></td><td>13133489 - 46849531 </td></tr><tr><td style="text-align: center;"><img src="legend/_3_468495311145963492.png" /></td><td>46849531 - 114596349 </td></tr><tr><td style="text-align: center;"><img src="legend/_3_1145963492511144003.png" /></td><td>114596349 - 251114400 </td></tr><tr><td style="text-align: center;"><img src="legend/_3_2511144008301222784.png" /></td><td>251114400 - 830122278 </td></tr></table>': layer__3,'КД Статус<br /><table><tr><td style="text-align: center;"><img src="legend/_2_10.png" /></td><td>1</td></tr><tr><td style="text-align: center;"><img src="legend/_2_51.png" /></td><td>5</td></tr><tr><td style="text-align: center;"><img src="legend/_2_62.png" /></td><td>6</td></tr><tr><td style="text-align: center;"><img src="legend/_2_3.png" /></td><td></td></tr></table>': layer__2,'КД Индекс<br /><table><tr><td style="text-align: center;"><img src="legend/_1_0030020000000.png" /></td><td>003002000000</td></tr><tr><td style="text-align: center;"><img src="legend/_1_0030080000001.png" /></td><td>003008000000</td></tr><tr><td style="text-align: center;"><img src="legend/_1_None2.png" /></td><td>None</td></tr><tr><td style="text-align: center;"><img src="legend/_1_3.png" /></td><td></td></tr></table>': layer__1,"OSM Standard": layer_OSMStandard_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
