@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Стили Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>    
+    <!-- Styled Layer Control -->
+    <link rel="stylesheet" type="text/css" href="./css/styledLayerControl.css" />
+    <script src="./src/styledLayerControl.js"></script>
+    
+    <title>Интерактивная карта</title>
+</head>
+<body>
+    <!-- Библиотека Leaflet должна быть после стилей Leaflet -->
+    <div id="mapid"></div>
+
+    <script src="data/building.js"></script>
+
+    <script>
+        var map = L.map('mapid').setView([56, 93], 13);
+        // map.options.crs = L.CRS.EPSG3395;
+        map.options.crs = L.CRS.EPSG3857;
+
+        L.Map.prototype.setCrs = function(newCrs) {
+            this.options.crs = newCrs;
+        }
+        
+        map.on('layeradd', function(layer) {
+            // console.log('base change');
+            // console.log(layer.name);
+            var cen = map.getCenter();
+            var zoom = map.getZoom();
+            if(map.hasLayer(base_osm)) {
+                map.setCrs(L.CRS.EPSG3857);
+                // console.log('osm');
+            }
+            else if(map.hasLayer(base_yandex)) {
+                map.setCrs(L.CRS.EPSG3395);
+                // console.log('ya');
+            }
+            // map.setView(map.getCenter(),map.getZoom());
+            map.setView(cen, zoom);
+        });
+        
+        var base_yandex = L.tileLayer('http://vec01.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });  
+
+        var base_osm = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+
+        map.addLayer(base_osm);
+        // map.addLayer(base_yandex);
+
+        // base_osm.StyledLayerControl = {
+        //     visible: true
+        // };
+
+        var layer_building = new L.geoJson(json_building, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_building',
+            layerName: 'json_building',
+            
+        });
+
+        var baseMaps = [
+            {
+                groupName: "Базовые карты",
+                expanded: true,
+                layers: {
+                    "OpenStreetMap": base_osm,
+                    "Яндекс": base_yandex,
+                }
+            }
+        ];
+
+        var overlays = [
+            {
+                groupName: "Подоснова",
+                expanded: false,
+                layers: {
+                    "Застройка": layer_building,
+                }
+            }
+        ];
+
+        var options = [];
+
+        var control = L.Control.styledLayerControl(baseMaps, overlays, options);
+        // var control = L.control.layers(baseMaps, overlays).addTo(map);//, options);
+        map.addControl(control);
+
+    </script>
+
+</body>
+</html>
