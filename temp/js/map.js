@@ -11,6 +11,20 @@ var base_osm = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxNativeZoom: 19
 });
 
+var test_mapbox = L.tileLayer.provider('MapBox', {
+    id : 'alexlipovka/ckgg7i4yz029v19oao7hyjdgx',
+    accessToken : 'pk.eyJ1IjoiYWxleGxpcG92a2EiLCJhIjoiY2p5N21ybTUzMDEzdTNocDF2ZnF1dGN0ZiJ9.2fkd6wt4uOWM44Pxhf2daw',
+});
+
+var test_postgis = L.tileLayer.wms('http://localhost:8080/geoserver/cite/wms', {
+    layers: 'cite:building_kras',
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.0',
+    attribution: "СФУ ГИС"
+});
+
+
 var base_toner = L.tileLayer.provider('Stamen.Toner');
 var base_watercolor = L.tileLayer.provider('Stamen.Watercolor');
 
@@ -81,6 +95,8 @@ var overlays = [
         groupName: "Исходные слои",
         expanded: true,
         layers: {
+            "Пример MapBox" : test_mapbox,
+            "Пример Postgis" : test_postgis,
             'Застройка<br />\
             <table>\
                 <tr>\
